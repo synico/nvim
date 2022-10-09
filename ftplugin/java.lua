@@ -5,8 +5,19 @@ vim.opt_local.cmdheight = 2
 --local capabilites = vim.lsp.make_client_capabilities()
 --capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local home = os.getenv "HOME"
+if vim.fn.has "unix" == 1 then
+  WORKSPACE_PATH = home..'/workspace/'
+  LIB_PATH = '/opt/jdtls/current/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
+  CONFIG = '/opt/jdtls/current/config_linux/'
+--elseif vim.fn.has "win" == 1 then
+else
+  WORKSPACE_PATH = 'C:/Users/Nick/workspace/'
+  LIB_PATH = 'C:/usr/local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
+  CONFIG = 'C:/usr/local/jdtls/config_win/'
+end
+
+-- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -27,14 +38,14 @@ local config = {
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     -- 💀
-    '-jar', '/opt/jdtls/current/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+    '-jar', LIB_PATH,
          -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
          -- Must point to the                                                     Change this to
          -- eclipse.jdt.ls installation                                           the actual version
 
 
     -- 💀
-    '-configuration', '/opt/jdtls/current/config_linux/',
+    '-configuration', CONFIG,
                     -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
                     -- Must point to the                      Change to one of `linux`, `win` or `mac`
                     -- eclipse.jdt.ls installation            Depending on your system.
@@ -42,7 +53,7 @@ local config = {
 
     -- 💀
     -- See `data directory configuration` section in the README
-    '-data', home .. '/workspace/'
+    '-data', WORKSPACE_PATH
   },
 
   -- 💀

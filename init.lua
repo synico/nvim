@@ -8,12 +8,11 @@ require("plugins.nvim-tree")
 require("plugins.bufferline")
 require("plugins.telescope")
 -- LSP
--- require("lsp.nvim-lsp-installer")
 require("lsp.nvim-lspconfig")
 require("lsp.mason")
 require("lsp.mason-lspconfig")
 require("lsp.nvim-cmp")
-require('lsp.null-ls')
+-- require('lsp.null-ls')
 
 require("plugins.gruvbox")
 require("plugins.lualine")
