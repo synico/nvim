@@ -2,96 +2,91 @@ vim.opt_local.shiftwidth =2
 vim.opt_local.tabstop = 2
 vim.opt_local.cmdheight = 2
 
---local capabilites = vim.lsp.make_client_capabilities()
---capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local jdtls = require('jdtls')
+local root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'})
 
-local home = os.getenv "HOME"
 if vim.fn.has "unix" == 1 then
-  WORKSPACE_PATH = home..'/workspace/'
+  WORKSPACE_PATH = os.getenv('HOME')..'/workspace/'
   LIB_PATH = '/opt/jdtls/current/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
   CONFIG = '/opt/jdtls/current/config_linux/'
---elseif vim.fn.has "win" == 1 then
 else
   WORKSPACE_PATH = 'C:/Users/Nick/workspace/'
   LIB_PATH = 'C:/usr/local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
   CONFIG = 'C:/usr/local/jdtls/config_win/'
 end
 
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
-  -- The command that starts the language server
-  -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
-  cmd = {
+  flags = {},
+  handlers = {},
+  capabilities = {},
+  cmd = {},
+  root_dir = {},
+  on_attach = {},
+  settings = {},
+}
 
-    -- 💀
-    'java', -- or '/path/to/java17_or_newer/bin/java'
-            -- depends on if `java` is in your $PATH env variable and if it points to the right version.
+config.flags = {
+  debounce_text_changes = 80,
+}
 
-    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-    '-Dosgi.bundles.defaultStartLevel=4',
-    '-Declipse.product=org.eclipse.jdt.ls.core.product',
-    '-Dlog.protocol=true',
-    '-Dlog.level=ALL',
-    '-Xms1g',
-    '--add-modules=ALL-SYSTEM',
-    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-
-    -- 💀
-    '-jar', LIB_PATH,
-         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
-         -- Must point to the                                                     Change this to
-         -- eclipse.jdt.ls installation                                           the actual version
-
-
-    -- 💀
-    '-configuration', CONFIG,
-                    -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
-                    -- Must point to the                      Change to one of `linux`, `win` or `mac`
-                    -- eclipse.jdt.ls installation            Depending on your system.
-
-
-    -- 💀
-    -- See `data directory configuration` section in the README
-    '-data', WORKSPACE_PATH
-  },
-
+config.cmd = {
   -- 💀
-  -- This is the default if not provided, you can remove it. Or adjust as needed.
-  -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+  'java', -- or '/path/to/java17_or_newer/bin/java'
+          -- depends on if `java` is in your $PATH env variable and if it points to the right version.
+  '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+  '-Dosgi.bundles.defaultStartLevel=4',
+  '-Declipse.product=org.eclipse.jdt.ls.core.product',
+  '-Dlog.protocol=true',
+  '-Dlog.level=ALL',
+  '-Xms1g',
+  '--add-modules=ALL-SYSTEM',
+  '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+  '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+  -- 💀
+  '-jar', LIB_PATH,
+       -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
+       -- Must point to the                                                     Change this to
+       -- eclipse.jdt.ls installation                                           the actual version
+  -- 💀
+  '-configuration', CONFIG,
+                  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
+                  -- Must point to the                      Change to one of `linux`, `win` or `mac`
+                  -- eclipse.jdt.ls installation            Depending on your system.
+  -- 💀
+  -- See `data directory configuration` section in the README
+  '-data', WORKSPACE_PATH
+}
 
-  -- Here you can configure eclipse.jdt.ls specific settings
-  -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-  -- for a list of options
-  settings = {
-    java = {
-      configuration = {
-        runtimes = {
-          {
-            name = 'JavaSE-11',
-            path = '/usr/local/java/jdk-11/',
-          },
-          {
-            name = 'JavaSE-17',
-            path = '/usr/local/java/jdk-17/',
-          },
+config.on_attach = function(client, bufnr)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set('n', "<A-o>", jdtls.organize_imports, opts)
+  vim.keymap.set('n', "crv", jdtls.extract_variable, opts)
+  vim.keymap.set('v', "crv", [[<ESC><CMD>lua require('jdtls').extract_variable(true)<CR>]], opts)
+  vim.keymap.set('v', 'crm', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
+  vim.keymap.set('n', "crc", jdtls.extract_constant, opts)
+
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'cd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+end
+
+config.root_dir = root_dir
+
+config.settings = {
+  java = {
+    signatureHelp = { enabled = true },
+    contentProvider = { preferred = 'fernflower' },
+    configuration = {
+      runtimes = {
+        {
+          name = 'JavaSE-11',
+          path = '/usr/local/java/jdk-11/',
         },
-      }
+        {
+          name = 'JavaSE-17',
+          path = '/usr/local/java/jdk-17/',
+        },
+      },
     }
   },
-
-  -- Language server `initializationOptions`
-  -- You need to extend the `bundles` with paths to jar files
-  -- if you want to use additional eclipse.jdt.ls plugins.
-  --
-  -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-  --
-  -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
-  init_options = {
-    bundles = {}
-  },
 }
--- This starts a new client & server,
--- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+
+jdtls.start_or_attach(config)
