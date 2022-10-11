@@ -9,10 +9,14 @@ if vim.fn.has "unix" == 1 then
   WORKSPACE_PATH = os.getenv('HOME')..'/workspace/'
   LIB_PATH = '/opt/jdtls/current/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
   CONFIG = '/opt/jdtls/current/config_linux/'
-else
+  JDK11 = '/usr/local/java/jdk-11/'
+  JDK17 = '/usr/local/java/jdk-17/'
+else --win
   WORKSPACE_PATH = 'C:/Users/Nick/workspace/'
   LIB_PATH = 'C:/usr/local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
   CONFIG = 'C:/usr/local/jdtls/config_win/'
+  JDK11 = 'C:/usr/local/java/jdk-11.0.13/'
+  JDK17 = 'C:/user/local/java/jdk-17.0.2/'
 end
 
 local config = {
@@ -65,7 +69,7 @@ config.on_attach = function(client, bufnr)
   vim.keymap.set('v', 'crm', [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], opts)
   vim.keymap.set('n', "crc", jdtls.extract_constant, opts)
 
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'cd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'cd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
 end
 
 config.root_dir = root_dir
@@ -78,11 +82,11 @@ config.settings = {
       runtimes = {
         {
           name = 'JavaSE-11',
-          path = '/usr/local/java/jdk-11/',
+          path = JDK11,
         },
         {
           name = 'JavaSE-17',
-          path = '/usr/local/java/jdk-17/',
+          path = JDK17,
         },
       },
     }
