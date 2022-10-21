@@ -15,8 +15,8 @@ else --win
   WORKSPACE_PATH = 'C:/Users/Nick/workspace/'
   LIB_PATH = 'C:/usr/local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
   CONFIG = 'C:/usr/local/jdtls/config_win/'
-  JDK11 = 'C:/usr/local/java/jdk-11.0.13/'
-  JDK17 = 'C:/usr/local/java/jdk-17.0.2/'
+  JDK11 = 'C:/usr/local/java/jdk-11/'
+  JDK17 = 'C:/usr/local/java/jdk-17/'
 end
 
 local config = {
@@ -85,10 +85,10 @@ config.on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   -- Java specific
---  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>di", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
---  vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
---  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>de", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
---  vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>di", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>de", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 
 end
 

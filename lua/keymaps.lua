@@ -55,7 +55,7 @@ vim.keymap.set('n', 'fg', telebuiltin.live_grep, {})
 vim.keymap.set('n', 'fb', telebuiltin.buffers, {})
 vim.keymap.set('n', 'fh', telebuiltin.help_tags, {})
 -- nvim-jdtls
-local jdtls = require('jdtls')
+-- local jdtls = require('jdtls')
 -- vim.keymap.set('n', '<A-o>', jdtls.organize_imports, {}) 
 -- vim.keymap.set('n', 'crv', jdtls.extract_variable, {}) 
 -- vim.keymap.set('n', 'crc', jdtls.extract_constant, {}) 
