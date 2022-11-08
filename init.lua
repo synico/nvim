@@ -7,6 +7,7 @@ require("plugins.nvim-treesitter")
 require("plugins.nvim-tree")
 require("plugins.bufferline")
 require("plugins.telescope")
+require("plugins.symbols-outline")
 -- LSP
 require("lsp.nvim-lspconfig")
 require("lsp.mason")

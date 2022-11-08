@@ -45,6 +45,9 @@ return require('packer').startup(function(use)
   }
   use 'nvim-telescope/telescope-ui-select.nvim'
 
+  -- outline
+  use 'simrat39/symbols-outline.nvim'
+
   -- LSP
   use {
       "williamboman/mason.nvim",
