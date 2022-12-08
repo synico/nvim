@@ -56,4 +56,27 @@ lspconfig.jdtls.setup {
   }
 }
 
---lspconfig.sumneko_lua.
+lspconfig.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'Lua 5.4',
+        path = {
+          '?.lua',
+          '?/init.lua',
+          vim.fn.expand'~/.luarocks/share/lua/5.4/?.lua',
+          vim.fn.expand'~/.luarocks/share/lua/5.4/?/init.lua',
+          '/usr/local/lua/current/?.lua',
+          '/usr/local/lua/current/?/init.lua'
+        }
+      },
+      workspace = {
+        library = {
+          vim.fn.expand'~/.luarocks/share/lua/5.3',
+          '/usr/local/lua/current'
+        }
+      }
+    }
+  }
+}
+

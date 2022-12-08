@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
 
   -- treesitter
   use {
-      'nvim-treesitter/nvim-treesitter', 
+      'nvim-treesitter/nvim-treesitter',
       run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
 
@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
 
   -- bufferline
   use {
-      'akinsho/bufferline.nvim', 
+      'akinsho/bufferline.nvim',
       tag = "v2.*",
       requires = 'kyazdani42/nvim-web-devicons'
   }
@@ -81,7 +81,7 @@ return require('packer').startup(function(use)
   use {
       "mfussenegger/nvim-jdtls",
   }
-  
+
   -- DAP
   use {
       'mfussenegger/nvim-dap'
@@ -103,7 +103,7 @@ return require('packer').startup(function(use)
       'lunarvim/darkplus.nvim',
       'lunarvim/onedarker.nvim',
   }
-  
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
