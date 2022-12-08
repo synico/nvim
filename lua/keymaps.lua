@@ -64,6 +64,10 @@ vim.keymap.set('n', 'fh', telebuiltin.help_tags, {})
 -- vim.keymap.set('n', 'crc', jdtls.extract_constant, {}) 
 -- vim.keymap.set('n', 'crm', jdtls.extract_method, {}) 
 
+-- SymbolsOutline
+keymap("n", "<leader>so", ":SymbolsOutlineOpen<CR>", opts)
+keymap("n", "<leader>sc", ":SymbolsOutlineClose<CR>", opts)
+
 -- markdown-preview
 keymap("n", "<C-s>", ":MarkdownPreview<CR>", opts)
 
