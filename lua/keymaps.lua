@@ -37,6 +37,7 @@ keymap("n", "<F2>", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>nt", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>si", ":NvimTreeResize +5<CR>", opts)
 keymap("n", "<leader>sd", ":NvimTreeResize -5<CR>", opts)
+
 -- bufferline
 keymap("n", "<m-h>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<m-l>", ":BufferLineCycleNext<CR>", opts)
@@ -48,16 +49,21 @@ keymap("n", "<leader>3", ":BufferLineGoToBuffer 3<CR>", opts)
 keymap("n", "<leader>4", ":BufferLineGoToBuffer 4<CR>", opts)
 keymap("n", "<leader>5", ":BufferLineGoToBuffer 5<CR>", opts)
 keymap("n", "<leader>ct", ":BufferLinePickClose<CR>", opts)
+
 -- telescope
 local telebuiltin = require('telescope.builtin')
 vim.keymap.set('n', 'ff', telebuiltin.find_files, {})
 vim.keymap.set('n', 'fg', telebuiltin.live_grep, {})
 vim.keymap.set('n', 'fb', telebuiltin.buffers, {})
 vim.keymap.set('n', 'fh', telebuiltin.help_tags, {})
+
 -- nvim-jdtls
 -- local jdtls = require('jdtls')
 -- vim.keymap.set('n', '<A-o>', jdtls.organize_imports, {}) 
 -- vim.keymap.set('n', 'crv', jdtls.extract_variable, {}) 
 -- vim.keymap.set('n', 'crc', jdtls.extract_constant, {}) 
 -- vim.keymap.set('n', 'crm', jdtls.extract_method, {}) 
+
+-- markdown-preview
+keymap("n", "<C-s>", ":MarkdownPreview<CR>", opts)
 

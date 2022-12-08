@@ -40,3 +40,5 @@ luac.out
 *.hex
 
 plugin/
+node_modules/
+yarn.lock
