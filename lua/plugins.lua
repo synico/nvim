@@ -54,7 +54,6 @@ return require('packer').startup(function(use)
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
   }
-  use { "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" }
   use {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -78,9 +77,9 @@ return require('packer').startup(function(use)
       'dcampos/nvim-snippy',
       'dcampos/cmp-snippy',
   }
-  use {
-      "mfussenegger/nvim-jdtls",
-  }
+  use { "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" }
+  use { "mfussenegger/nvim-jdtls" }
+  use { "glepnir/lspsaga.nvim", branch = "main" }
 
   -- DAP
   use {
