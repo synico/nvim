@@ -1,3 +1,3 @@
 require("mason-lspconfig").setup({
-  ensure_installed = { "jdtls", "sumneko_lua" }
+  ensure_installed = { "jdtls", "lua_ls" }
 })
