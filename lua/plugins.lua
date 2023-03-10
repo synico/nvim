@@ -54,26 +54,39 @@ return require('packer').startup(function(use)
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
   }
-  use {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/nvim-cmp',
+  -- Autocompletion framework
+  use("hrsh7th/nvim-cmp")
 
-      --- For vsnip users
+  use {
+      -- cmp LSP completion
+      'hrsh7th/cmp-nvim-lsp',
+      -- cmp Snippet completion
       'hrsh7th/cmp-vsnip',
+      -- cmp Path completion
+      'hrsh7th/cmp-path',
+
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-cmdline',
+      after = { 'hrsh7th/nvim-cmp' },
+      requires = { 'hrsh7th/nvim-cmp' },
+  }
+
+  use {
+      -- Snippet engine
       'hrsh7th/vim-vsnip',
 
-      --- For luasnip users
+      -- Adds extra functionality over rust analyzer
+      'simrat39/rust-tools.nvim',
+
+      -- For luasnip users
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
 
-      --- For ultisnips users
+      -- For ultisnips users
       'SirVer/ultisnips',
       'quangnguyen30192/cmp-nvim-ultisnips',
 
-      --- snippy users
+      -- snippy users
       'dcampos/nvim-snippy',
       'dcampos/cmp-snippy',
   }
