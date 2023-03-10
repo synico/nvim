@@ -52,6 +52,7 @@ return require('packer').startup(function(use)
   use {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      -- configurations for neovim LSP
       "neovim/nvim-lspconfig",
   }
   -- Autocompletion framework

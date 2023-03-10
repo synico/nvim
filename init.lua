@@ -13,7 +13,7 @@ require("lsp.nvim-lspconfig")
 require("lsp.mason")
 require("lsp.mason-lspconfig")
 require("lsp.nvim-cmp")
-require("lsp.rust-analyzer-lsp")
+require("lsp.rust-analyzer")
 -- require('lsp.null-ls')
 -- require("lsp.lspsaga")
 
