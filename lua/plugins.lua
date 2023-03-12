@@ -24,9 +24,9 @@ return require('packer').startup(function(use)
 
   -- nvimtree
   use {
-      'kyazdani42/nvim-tree.lua',
+      'nvim-tree/nvim-tree.lua',
       requires = {
-	'kyazdani42/nvim-web-devicons'
+	'nvim-tree/nvim-web-devicons'
       }
   }
 
@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
   use {
       'akinsho/bufferline.nvim',
       tag = "v2.*",
-      requires = 'kyazdani42/nvim-web-devicons'
+      requires = 'nvim-tree/nvim-web-devicons'
   }
 
   -- telescope
@@ -116,7 +116,7 @@ return require('packer').startup(function(use)
   -- lualine
   use {
       'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
   -- markdown preview
