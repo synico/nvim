@@ -48,39 +48,35 @@ return require('packer').startup(function(use)
   -- outline
   use 'simrat39/symbols-outline.nvim'
 
-  -- LSP
+  -- LSP management
   use {
       "williamboman/mason.nvim",
+      -- bridges mason with the lspconfig plugin - making it easier to use both plugins together.
       "williamboman/mason-lspconfig.nvim",
       -- configurations for neovim LSP
       "neovim/nvim-lspconfig",
   }
-  -- Autocompletion framework
-  use("hrsh7th/nvim-cmp")
 
   use {
+      -- Autocompletion framework
+      'hrsh7th/nvim-cmp',
       -- cmp LSP completion
       'hrsh7th/cmp-nvim-lsp',
       -- cmp Snippet completion
       'hrsh7th/cmp-vsnip',
       -- cmp Path completion
       'hrsh7th/cmp-path',
-
+      -- nvim-cmp source for buffer word
       'hrsh7th/cmp-buffer',
+      -- nvim-cmd source for vim's cmdline
       'hrsh7th/cmp-cmdline',
       after = { 'hrsh7th/nvim-cmp' },
       requires = { 'hrsh7th/nvim-cmp' },
   }
 
   use {
-      -- Snippet engine
+      -- VSCode(LSP)'s snippet feature in vim/nvim
       'hrsh7th/vim-vsnip',
-
-      -- Adds extra functionality over rust analyzer
-      'simrat39/rust-tools.nvim',
-
-      -- For luasnip users
-      'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
 
       -- For ultisnips users
@@ -92,8 +88,25 @@ return require('packer').startup(function(use)
       'dcampos/cmp-snippy',
   }
   use { "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" }
-  use { "mfussenegger/nvim-jdtls" }
   use { "glepnir/lspsaga.nvim", branch = "main" }
+
+  use {
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      tag = "v<CurrentMajor>.*",
+      -- install jsregexp (optional!:).
+      run = "make install_jsregexp"
+  }
+
+  -- Language specific Extensions
+  use {
+      -- [Java] Extensions for LSP support in Neovim for eclipse.jdt.ls
+      -- ftplugin/java.lua
+      'mfussenegger/nvim-jdtls',
+      -- [Rust] Adds extra functionality over rust analyzer
+      -- lua/lsp/rust-analyzer.lua
+      'simrat39/rust-tools.nvim' 
+  }
 
   -- DAP
   use {
