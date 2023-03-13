@@ -66,6 +66,8 @@ lspconfig['rust_analyzer'].setup{
 }
 
 lspconfig['gopls'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
   cmd = {"gopls", "serve"},
   filetype = {"go", "gomod"},
   root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
@@ -77,4 +79,9 @@ lspconfig['gopls'].setup{
       staticcheck = true,
     },
   },
+}
+
+lspconfig['lua_ls'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
 }
