@@ -55,6 +55,7 @@ lspconfig.jdtls.setup {
     "-Xms100m",
   }
 }
+
 lspconfig['rust_analyzer'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
@@ -62,4 +63,18 @@ lspconfig['rust_analyzer'].setup{
   settings = {
     ["rust_analyzer"] = {}
   }
+}
+
+lspconfig['gopls'].setup{
+  cmd = {"gopls", "serve"},
+  filetype = {"go", "gomod"},
+  root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
 }
