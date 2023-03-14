@@ -87,7 +87,10 @@ return require('packer').startup(function(use)
       'dcampos/nvim-snippy',
       'dcampos/cmp-snippy',
   }
+
+  -- Use Neovim as a Language server to inject LSP diagnostics, code actions, and more via Lua
   use { "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" }
+  -- 
   use { "glepnir/lspsaga.nvim", branch = "main" }
 
   use {
@@ -105,7 +108,7 @@ return require('packer').startup(function(use)
       'mfussenegger/nvim-jdtls',
       -- [Rust] Adds extra functionality over rust analyzer
       -- lua/lsp/rust-analyzer.lua
-      'simrat39/rust-tools.nvim' 
+      'simrat39/rust-tools.nvim'
   }
 
   -- DAP
@@ -120,7 +123,7 @@ return require('packer').startup(function(use)
   }
 
   -- markdown preview
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) 
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- Theme
   use {
