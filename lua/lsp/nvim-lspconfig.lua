@@ -42,29 +42,6 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-lspconfig.jdtls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  vmargs = {
-    "-XX:+UseParallelGC",
-    "-XX:GCTimeRatio=4",
-    "-XX:AdaptiveSizePolicyWeight=90",
-    "-Dsun.zip.disableMemoryMapping=true",
-    "-Djava.import.generatesMetadataFilesAtProjectRoot=false",
-    "-Xmx1G",
-    "-Xms100m",
-  }
-}
-
-lspconfig['rust_analyzer'].setup{
-  on_attach = on_attach,
-  flags = lsp_flags,
-  -- Server-specific settings...
-  settings = {
-    ["rust_analyzer"] = {}
-  }
-}
-
 lspconfig['gopls'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
