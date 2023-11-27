@@ -61,4 +61,17 @@ lspconfig['gopls'].setup{
 lspconfig['lua_ls'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        globals = {
+          "vim",
+          "require",
+        },
+      },
+    },
+  },
 }
